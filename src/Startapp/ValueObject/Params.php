@@ -91,4 +91,13 @@ class Params
 
         $this->name = $name;
     }
+
+    public function setLicense($license)
+    {
+        if (!in_array($license, self::ALLOWED_LICENSES)) {
+            throw new InvalidParameterSettingException('Invalid value for license supplied');
+        }
+
+        $this->license = $license;
+    }
 }
