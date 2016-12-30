@@ -51,4 +51,42 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(Params::DEFAULT_LICENSE, 'agpl');
     }
+
+    /**
+     * @dataProvider nameDataProvider
+     * @param $name
+     * @param $valid
+     */
+    public function testCanSetNameCorrectly($name, $valid)
+    {
+        if (!$valid) {
+            $this->expectException(InvalidParameterSettingException::class);
+            $this->expectExceptionMessage('Invalid value for name supplied');
+        }
+
+        $params = new Params();
+        $params->setName($name);
+    }
+
+    public function nameDataProvider()
+    {
+        return [
+            [
+                'MyApp',
+                true
+            ],
+            [
+                'MyApp21',
+                false
+            ],
+            [
+                '21',
+                false
+            ],
+            [
+                '_lulbot__',
+                false
+            ]
+        ];
+    }
 }
