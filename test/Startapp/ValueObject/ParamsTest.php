@@ -159,4 +159,53 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
             ],
         ];
     }
+
+    /**
+     * @dataProvider categoryDataProvider
+     * @param $category
+     * @param $valid
+     */
+    public function testCategoryCanOnlyBeSetToValidValue($category, $valid)
+    {
+        if (!$valid) {
+            $this->expectException(InvalidParameterSettingException::class);
+            $this->expectExceptionMessage('Invalid value for category supplied');
+        }
+
+        $params = new Params();
+        $params->setCategory($category);
+    }
+
+    /**
+     * @return array
+     */
+    public function categoryDataProvider()
+    {
+        return [
+            [
+                'multimedia',
+                true
+            ],
+            [
+                'tool',
+                true
+            ],
+            [
+                'pim',
+                true
+            ],
+            [
+                'other',
+                true
+            ],
+            [
+                'game',
+                true
+            ],
+            [
+                'productivity',
+                true
+            ],
+        ];
+    }
 }

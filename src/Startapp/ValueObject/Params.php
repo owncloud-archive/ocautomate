@@ -52,6 +52,11 @@ class Params
     /**
      * @var string
      */
+    private $category;
+
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -99,5 +104,16 @@ class Params
         }
 
         $this->license = $license;
+    }
+
+    public function setCategory($category)
+    {
+        if (!in_array($category, self::ALLOWED_CATEGORIES)) {
+            throw new InvalidParameterSettingException(
+                'Invalid value for category supplied'
+            );
+        }
+
+        $this->category = $category;
     }
 }
