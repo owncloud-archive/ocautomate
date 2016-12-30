@@ -1,0 +1,35 @@
+{
+    "name": "owncloud/ocdev",
+    "description": "a tool for creating app templates and setting up installations from git",
+    "type": "project",
+    "license": "gpl",
+    "authors": [
+        {
+            "name": "Matthew Setter",
+            "email": "matthew@matthewsetter.com"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Startapp\\": "src/Startapp/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StartappTest\\": "test/Startapp/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs",
+            "@test"
+        ],
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit"
+    }
+}
