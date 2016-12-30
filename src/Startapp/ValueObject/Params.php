@@ -17,6 +17,9 @@ class Params
         'game',
         'productivity'
     ];
+    const DEFAULT_LICENSE = 'agpl';
+    const DEFAULT_APP_VERSION = '0.0.1';
+    const DEFAULT_OWNCLOUD_VERSION = '9.0';
 
     /**
      * @var string

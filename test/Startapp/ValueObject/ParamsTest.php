@@ -14,17 +14,15 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
 
     public function testLicenseTypes()
     {
-        $params = new Params();
         $this->assertSame(
             ['agpl', 'mit'],
-            $params::ALLOWED_LICENSES,
+            Params::ALLOWED_LICENSES,
             'Available license types not what was expected'
         );
     }
 
     public function testAllowedCategories()
     {
-        $params = new Params();
         $this->assertSame(
             [
                 'multimedia',
@@ -34,8 +32,23 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
                 'game',
                 'productivity'
             ],
-            $params::ALLOWED_CATEGORIES,
+            Params::ALLOWED_CATEGORIES,
             'Available categories not what was expected'
         );
+    }
+
+    public function testDefaultAppVersion()
+    {
+        $this->assertSame(Params::DEFAULT_APP_VERSION, '0.0.1');
+    }
+
+    public function testDefaultOwnCloudVersion()
+    {
+        $this->assertSame(Params::DEFAULT_OWNCLOUD_VERSION, '9.0');
+    }
+
+    public function testDefaultLicense()
+    {
+        $this->assertSame(Params::DEFAULT_LICENSE, 'agpl');
     }
 }
