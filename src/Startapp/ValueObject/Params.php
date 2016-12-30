@@ -9,6 +9,14 @@ namespace Startapp;
 class Params
 {
     const ALLOWED_LICENSES = ['agpl', 'mit'];
+    const ALLOWED_CATEGORIES = [
+        'multimedia',
+        'tool',
+        'pim',
+        'other',
+        'game',
+        'productivity'
+    ];
 
     /**
      * @var string

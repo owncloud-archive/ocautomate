@@ -21,4 +21,21 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
             'Available license types not what was expected'
         );
     }
+
+    public function testAllowedCategories()
+    {
+        $params = new Params();
+        $this->assertSame(
+            [
+                'multimedia',
+                'tool',
+                'pim',
+                'other',
+                'game',
+                'productivity'
+            ],
+            $params::ALLOWED_CATEGORIES,
+            'Available categories not what was expected'
+        );
+    }
 }
