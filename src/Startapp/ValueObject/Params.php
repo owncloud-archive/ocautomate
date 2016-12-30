@@ -8,6 +8,8 @@ namespace Startapp;
  */
 class Params
 {
+    const ALLOWED_LICENSES = ['agpl', 'mit'];
+
     /**
      * @var string
      */
