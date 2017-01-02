@@ -30,7 +30,16 @@ class Params
     const DEFAULT_LICENSE = 'agpl';
     const DEFAULT_APP_VERSION = '0.0.1';
     const DEFAULT_OWNCLOUD_VERSION = '9.0';
+
+    /**
+     * @var string Regular expression to validate the name
+     */
     const REGEX_NAME = '/^([A-Z][a-z]+)+$/';
+
+    /**
+     * @var string Regular expression to semantic version strings
+     */
+    const REGEX_SEMVER = '/0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*/';
 
     /**
      * @var string
@@ -75,12 +84,12 @@ class Params
     /**
      * @var string
      */
-    private $owncloud;
+    private $owncloudVersion;
 
     /**
      * @var string
      */
-    private $version;
+    private $appVersion;
 
     /**
      * @var
@@ -96,14 +105,58 @@ class Params
         return date('y');
     }
 
-    public function getApplicationversion()
+    /**
+     * @param string $version
+     * @return Params
+     */
+    public function setOwnCloudVersion($version)
     {
-        return self::DEFAULT_APP_VERSION;
+        if (preg_match(self::REGEX_SEMVER, $version) !== 1) {
+            throw new InvalidParameterSettingException('Invalid version value supplied');
+        }
+        $this->owncloudVersion = $version;
+
+        return $this;
     }
 
+    /**
+     * @param string $version
+     * @return Params
+     */
+    public function setApplicationVersion($version)
+    {
+        if (preg_match(self::REGEX_SEMVER, $version) !== 1) {
+            throw new InvalidParameterSettingException('Invalid version value supplied');
+        }
+        $this->appVersion = $version;
+        return $this;
+    }
+
+
+    /**
+     * Retrieve the application version
+     *
+     * @return string
+     */
+    public function getApplicationVersion()
+    {
+        if ($this->appVersion === null) {
+            return self::DEFAULT_APP_VERSION;
+        }
+        return $this->appVersion;
+    }
+
+    /**
+     * Retrieve the ownCloud version
+     *
+     * @return string
+     */
     public function getOwnCloudVersion()
     {
-        return self::DEFAULT_OWNCLOUD_VERSION;
+        if ($this->owncloudVersion === null) {
+            return self::DEFAULT_OWNCLOUD_VERSION;
+        }
+        return $this->owncloudVersion;
     }
 
     /**

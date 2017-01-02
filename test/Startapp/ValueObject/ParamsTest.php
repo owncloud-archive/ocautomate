@@ -32,11 +32,55 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCanGetDefaultValuesCorrectly()
+    public function testCanGetVersionStringsCorrectly()
     {
         $params = new Params();
         $this->assertSame('0.0.1', $params->getApplicationVersion());
         $this->assertSame('9.0', $params->getOwnCloudVersion());
+    }
+
+    /**
+     * @dataProvider semVerDataProvider
+     * @param $version
+     * @param $status
+     */
+    public function testCanSetAndGetOwnCloudVersionCorrectly($version, $status)
+    {
+        $params = new Params();
+
+        if (!$status) {
+            $this->expectException(InvalidParameterSettingException::class);
+            $this->expectExceptionMessage('Invalid version value supplied');
+        }
+
+        $params->setOwnCloudVersion($version);
+        $this->assertSame($version, $params->getOwnCloudVersion());
+    }
+
+    /**
+     * @dataProvider semVerDataProvider
+     * @param $version
+     * @param $status
+     */
+    public function testCanSetAndGetApplicationVersionCorrectly($version, $status)
+    {
+        $params = new Params();
+
+        if (!$status) {
+            $this->expectException(InvalidParameterSettingException::class);
+            $this->expectExceptionMessage('Invalid version value supplied');
+        }
+
+        $params->setApplicationVersion($version);
+        $this->assertSame($version, $params->getApplicationVersion());
+    }
+
+    public function semVerDataProvider()
+    {
+        return [
+            ['', false],
+            [null, false],
+        ];
     }
 
     /**
