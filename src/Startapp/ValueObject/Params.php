@@ -2,7 +2,7 @@
 
 namespace Startapp;
 
-use StartappTest\InvalidParameterSettingException;
+use Startapp\InvalidParameterSettingException;
 
 /**
  * Class Params
