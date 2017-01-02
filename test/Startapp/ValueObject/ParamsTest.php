@@ -32,6 +32,13 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCanGetDefaultValuesCorrectly()
+    {
+        $params = new Params();
+        $this->assertSame('0.0.1', $params->getApplicationVersion());
+        $this->assertSame('9.0', $params->getOwnCloudVersion());
+    }
+
     /**
      *
      */

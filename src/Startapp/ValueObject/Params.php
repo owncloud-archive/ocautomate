@@ -88,6 +88,16 @@ class Params
         return date('y');
     }
 
+    public function getApplicationversion()
+    {
+        return self::DEFAULT_APP_VERSION;
+    }
+
+    public function getOwnCloudVersion()
+    {
+        return self::DEFAULT_OWNCLOUD_VERSION;
+    }
+
     public function setName($name)
     {
         if (preg_match(self::REGEX_NAME, $name) !== 1) {
