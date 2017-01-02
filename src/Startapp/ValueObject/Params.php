@@ -10,7 +10,14 @@ use Startapp\InvalidParameterSettingException;
  */
 class Params
 {
+    /**
+     * @var array List of allowed licenses
+     */
     const ALLOWED_LICENSES = ['agpl', 'mit'];
+
+    /**
+     * @var array List of allowed categories
+     */
     const ALLOWED_CATEGORIES = [
         'multimedia',
         'tool',
@@ -19,6 +26,7 @@ class Params
         'game',
         'productivity'
     ];
+
     const DEFAULT_LICENSE = 'agpl';
     const DEFAULT_APP_VERSION = '0.0.1';
     const DEFAULT_OWNCLOUD_VERSION = '9.0';
@@ -98,6 +106,10 @@ class Params
         return self::DEFAULT_OWNCLOUD_VERSION;
     }
 
+    /**
+     * @param $name
+     * @throws \Startapp\InvalidParameterSettingException
+     */
     public function setName($name)
     {
         if (preg_match(self::REGEX_NAME, $name) !== 1) {
@@ -107,6 +119,10 @@ class Params
         $this->name = $name;
     }
 
+    /**
+     * @param $license
+     * @throws \Startapp\InvalidParameterSettingException
+     */
     public function setLicense($license)
     {
         if (!in_array($license, self::ALLOWED_LICENSES)) {
@@ -116,6 +132,10 @@ class Params
         $this->license = $license;
     }
 
+    /**
+     * @param $category
+     * @throws \Startapp\InvalidParameterSettingException
+     */
     public function setCategory($category)
     {
         if (!in_array($category, self::ALLOWED_CATEGORIES)) {
